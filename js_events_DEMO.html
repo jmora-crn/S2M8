@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>MouseEvent</title>
+    <style media="screen">
+
+    "classic": {
+  "purple": "#c678dd",
+  "error": "#f44747",
+  "coral": "#e06c75",
+  "whiskey": "#d19a66",
+  "chalky": "#e5c07b",
+  "lightDark": "#7f848e",
+  "dark": "#5c6370",
+  "malibu": "#61afef",
+  "green": "#98c379",
+  "fountainBlue": "#56b6c2",
+  "invalid": "#ffffff",
+  "lightWhite": "#bbbbbb"
+}
+
+
+      body {
+        font-family: Inconsolata, Monaco, Consolas, 'Courier New', Courier;
+        font-size: 0.8em;
+        background-color: #1E1E1E;
+        line-height: 1.5em;
+        color: #D8D8D8;
+      }
+      h2 {
+        width: 33em;
+      }
+      dl {
+        width: 30em;
+        padding: 0.75em;
+        border-radius: 0.5em;
+        box-shadow: 0.1em 0.1em 0.1em black;
+        margin:2em;
+        vertical-align: top;
+        display: inline-block;
+      }
+      dl:hover {
+        background-color: #2A2A2A;
+        box-shadow: 0.1em 0.1em 0.1em #111;
+      }
+      dt {
+        min-height: 1.5em;
+        text-align: right;
+        width: 7em;
+        color: #FFC600;
+      }
+      dd {
+        display: block;
+        width: 27em;
+        padding: 0.5em;
+        margin:0;
+      }
+      code {
+        display: block;
+        font-family: Menlo, 'Courier New', Courier;
+        width: 27em;
+        margin: 0.5em 0;
+        color: #A8A8A8;
+        padding: 0.5em;
+        background-color: rgba(255,255,255,0.1);
+        border: solid white 0.1em;
+        border-radius: 1em;
+        overflow: hidden;
+      }
+      div {
+        width: 27em;
+        margin: 0;
+      }
+      p {
+        width: 27em;
+        min-height: 1.5em;
+        margin: 0.5em 0;
+        padding: 0.5em;
+        background-color: rgba(0,255,255,0.1);
+        border: solid cyan 0.1em;
+        border-radius: 1em;
+      }
+      .tag {
+        color: #D25252;
+      }
+      .funcio {
+        color: #79ABFF;
+      }
+      .parametre {
+        color: #FFC600;
+      }
+
+      .resultat {
+        background-color: rgba(255,255,0,0.1);
+        border: solid yellow 0.1em;
+        visibility: hidden;
+      }
+
+      #demo8 {
+        width:100%;
+      }
+    </style>
+    <!--- Font: https://www.w3schools.com/jsref/obj_mouseevent.asp --->
+  </head>
+  <body>
+    <h2>Events: Esdeveniments de ratolí</h2>
+    <dl class="on_click">
+      <dt>onclick</dt>
+      <dd>L'esdeveniment té lloc quan l'usuari fa clic en un element</dd>
+      <code>&lt;<span class="tag">button</span> <span class="parametre">onclick</span>=&quot;<span class="funcio">myFunction()</span>&quot;&gt;Clica'm&lt;<span class="tag">/button</span>&gt;</code>
+      <div class="exemple">
+        <button onclick="quanClic()">Clica'm</button>
+        <p id="demo1" class="resultat"></p>
+        <script>
+        function quanClic() {
+          document.getElementById("demo1").innerHTML = "Hola Món";
+          document.getElementById("demo1").style.visibility = "visible";
+        }
+        </script>
+      </div>
+    </dl>
+    <dl class="on_context_menu">
+      <dt>oncontextmenu</dt>
+      <dd>L'esdeveniment té lloc quan l'usuari fa clic dret en un element per obrir un menú contextual</dd>
+      <code>&lt;<span class="tag">div</span> <span class="parametre">oncontextmenu</span>=&quot;<span class="funcio">myFunction()</span>&quot; contextmenu=&quot;mymenu&quot;&gt;</code>
+      <div class="exemple">
+        <p id="demo2" oncontextmenu="clicDret()" contextmenu="mymenu"></p>
+        <script>
+          function clicDret() {
+            alert("Has fet clic dret dins el div!");
+          }
+        </script>
+      </div>
+    </dl>
+    <dl class="on_dbl_click">
+      <dt>ondblclick</dt>
+      <dd>L'esdeveniment té lloc quan l'usuari fa doble clic en un element</dd>
+      <code>&lt;<span class="tag">p</span> <span class="parametre">ondblclick</span>=&quot;<span class="funcio">myFunction()</span>&quot;&gt;Double-click me&lt;<span class="tag">/p</span>&gt;</code>
+      <div class="exemple">
+        <p ondblclick="dobleClic()">Fes doble clic per activar una funció.</p>
+        <p id="demo3" class="resultat"></p>
+        <script>
+        function dobleClic() {
+          document.getElementById("demo3").innerHTML = "Hola Món";
+          document.getElementById("demo3").style.visibility = "visible";
+        }
+        </script>
+      </div>
+    </dl>
+    <dl class="on_mouse_down">
+      <dt>onmousedown</dt>
+      <dd>L'esdeveniment té lloc quan l'usuari pressiona un botó del ratolí sobre un element</dd>
+      <code>&lt;<span class="tag">p</span> <span class="parametre">onmousedown</span>=&quot;<span class="funcio">myFunction()</span>&quot;&gt;Click the text!&lt;<span class="tag">/p</span>&gt;</code>
+      <div class="exemple">
+        <p id="demo4" onmousedown="mouseDown()">Click the text! The mouseDown() function is triggered when the mouse button is pressed down over this paragraph, and sets the color of the text to red.
+        </p>
+        <script>
+          function mouseDown() {
+            document.getElementById("demo4").style.color = "red";
+          }
+      </script>
+      </div>
+    </dl>
+    <dl class="on_mouse_enter">
+      <dt>onmouseenter</dt>
+      <dd>L'esdeveniment té lloc quan el punter es mou dins un element</dd>
+      <code>&lt;<span class="tag">img</span> <span class="parametre">onmouseenter</span>=&quot;<span class="funcio">bigImg(this)</span>&quot; src=&quot;smiley.gif&quot; alt=&quot;Smiley&quot;&gt;</code>
+      <div class="exemple">
+        <p onmouseenter="punterDins(this)" onmouseleave="punterFora(this)"></p>
+        <script>
+        function punterDins(x) {
+          x.style.width = "50%";
+        }
+
+        function punterFora(x) {
+          x.style.width = "100%";
+        }
+        </script>
+      </div>
+    </dl>
+    <dl class="on_mouse_leave">
+      <dt>onmouseleave</dt>
+      <dd>L'esdeveniment té lloc quan el punter surt d'un element</dd>
+      <code>&lt;img onmouseleave=&quot;normalImg(this)&quot; src=&quot;smiley.gif&quot; alt=&quot;Smiley&quot;&gt;</code>
+      <div class="exemple">
+        <p onmouseenter="punterDins(this)" onmouseleave="punterFora(this)"></p>
+        <script>
+        function punterDins(x) {
+          x.style.width = "50%";
+        }
+
+        function punterFora(x) {
+          x.style.width = "100%";
+        }
+        </script>
+      </div>
+    </dl>
+    <dl class="on_mouse_move">
+      <dt>onmousemove</dt>
+      <dd>L'esdeveniment té lloc quan el punter es mou sobre un element</dd>
+      <code>&lt;div onmousemove=&quot;myFunction()&quot;&gt;Move the cursor over me&lt;/div&gt;</code>
+      <div class="exemple">
+        <p onmousemove="punterMovent(event)" onmouseout="clearCoor()"></p>
+        <p id="demo7" class="resultat"></p>
+        <script>
+          function punterMovent(e) {
+            var x = e.clientX;
+            var y = e.clientY;
+            var coor = "Coordinates: (" + x + "," + y + ")";
+            document.getElementById("demo7").innerHTML = coor;
+            document.getElementById("demo7").style.visibility = "visible";
+          }
+          function clearCoor() {
+            document.getElementById("demo7").innerHTML = "";
+            document.getElementById("demo7").style.visibility = "hidden";
+          }
+        </script>
+      </div>
+    </dl>
+    <dl class="on_mouse_out">
+      <dt>onmouseout</dt>
+      <dd>L'esdeveniment té lloc quan l'usuari mou el punter fora d'un element, o fora d'un dels seus fills</dd>
+      <code>&lt;img onmouseout=&quot;bigImg(this)&quot; src=&quot;smiley.gif&quot; alt=&quot;Smiley&quot;&gt;</code>
+      <div class="exemple">
+        <p id="demo8" onmouseout="punterDins(this)" onmouseout="punterFora(this)"></p>
+        <script>
+
+        function punterFora(x) {
+          x.style.width = "100%";
+        }
+        </script>
+      </div>
+    </dl>
+    <dl class="on_mouse_over">
+      <dt>onmouseover</dt>
+      <dd>L'esdeveniment té lloc quan l'usuari mou el punter dins d'un element, o dins d'un dels seus fills</dd>
+      <code>&lt;img onmouseover=&quot;bigImg(this)&quot; src=&quot;smiley.gif&quot; alt=&quot;Smiley&quot;&gt;</code>
+      <div class="exemple">
+        <p id="demo9" onmouseover="punterSobre(this)"></p>
+        <script>
+        function punterSobre(x) {
+          x.style.width = "50%";
+        }
+        </script>
+      </div>
+    </dl>
+    <dl class="on_mouse_up">
+      <dt>onmouseup</dt>
+      <dd>L'esdeveniment té lloc quan l'usuari deixa anar un botó del ratolí sobre un element</dd>
+      <code>&lt;<span class="tag">p</span> <span class="parametre">onmouseup</span>=&quot;<span class="funcio">mouseUp()</span>&quot;&gt;Click the text!&lt;<span class="tag">/p</span>&gt;</code>
+      <div class="exemple">
+        <p id="demo" onmouseup="mouseUp()">Click the text! The mouseUp() function is triggered when the mouse button is released, and sets the color of the text to green.
+        </p>
+        <script>
+          function mouseUp() {
+            document.getElementById("demo").style.color = "green";
+          }
+        </script>
+      </div>
+    </dl>
+  </body>
+</html>
