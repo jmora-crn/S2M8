@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es" manifest="cache.manifest">
+<head>
+  <meta charset="UTF-8">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+  
+  <link rel="icon" sizes="192x192" href="img/icon.png">
+  <link rel="icon" sizes="512x512" href="img/icon.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="img/icon.png">
+
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Player</title>
+  <style>
+    body {
+      background-color: white;
+    }
+    #contenidor {
+      width: 500px;
+      height: 920px;
+      padding: 20px;
+      background: #000;
+    }
+
+    .cover {
+      width: 500px;
+      height: 500px;
+      margin: 20px 0;
+      background: rgba(255,255,255, 0.3);
+      background: url(https://i1.sndcdn.com/artworks-000150867683-zzk1na-t500x500.jpg);
+    }
+
+    .info {
+      width: 500px;
+      height: 100px;
+      margin: 20px 0;
+      background: rgba(255,255,255, 0.3);
+    }
+    /* --------------- Tiradors ----------------- */
+
+    input[type=range] {
+      -webkit-appearance: none; /* Amaga el tirador per fer la màgia */
+      width: 100%; /* Firefox necessita una amplada específica */
+      background: transparent;  /* Amaga el tirador per fer la màgia */
+      background: rgba(255,255,255, 0.2);
+      margin: 0.0px 0;
+      border-radius: 10px;
+      margin: 20px auto;
+    }
+    input[type=range]:focus {
+      outline: none; /* Per no veure el contorn */
+    }
+
+    input[type=range]::-webkit-slider-runnable-track {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      /* box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; */
+      background: #4c4d4d;
+      border-radius: 10px;
+      border: 0px solid #010101;
+    }
+
+    /* Controlador */
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 20px;
+      width: 20px;
+      border-radius: 10px;
+      background: rgba(255,255,255, 0.3);
+      cursor: pointer;
+
+      margin-top: -0.0px;
+
+      box-shadow: 0px 0px 1px #670000, 0px 0px 0px #810000;
+      border: 0px solid #ff1e00;
+    }
+
+    /*  opcional  */
+    /*
+    input[type=range]:focus::-webkit-slider-runnable-track {
+      background: red;
+      border-radius: 10px;
+    }
+    */
+
+
+    /* --------------- Botons ----------------- */
+
+    #playpause {
+      position:relative;
+      border:none;
+      text-decoration:none;
+      width: 100px;
+      height: 100px;
+      background: #4c4d4d;
+      border-radius: 50px;
+    }
+
+    #playpause:focus {
+      outline: none; /* Per no veure el contorn */
+    }
+    #playpause:before, #playpause:after, #playpause:focus:before, #playpause:focus:after {
+      position: absolute;
+      content: " ";
+      z-index: 1000;
+    }
+    #playpause:before, #playpause:after {
+      height: 47px;
+      width: 19px;
+      left: 29px;
+      top: 28px;
+      display: block;
+      background: white;
+    }
+
+    #playpause:after {
+     left: 54px;
+    }
+
+    #playpause:focus:before {
+      top: 28px;
+      left: 34px;
+      width: 0;
+      height: 0;
+      border-left: 47px solid white;
+      border-right: 24px solid transparent;
+      border-bottom: 24px solid transparent;
+      border-top: 24px solid transparent;
+      display: block;
+      background: transparent;
+    }
+
+    #playpause:focus:after {
+     visibility:hidden;
+    }
+  </style>
+  <script>
+    var reproduint, playpause, barra;
+    var vesa, noutemps;
+    var emmudir, volum;
+
+    function inicialitzaReproductor() {
+      reproduint = document.getElementById("reproduint");
+      playpause = document.getElementById("playpause");
+      barra = document.getElementById("barra");
+      emmudir = document.getElementById("emmudir");
+      volum = document.getElementById("volum");
+
+      playpause.addEventListener("click", playPause, false);
+      barra.addEventListener("change", posicioAudio, false);
+      reproduint.addEventListener("timeupdate", actualitzaTemps, false);
+      emmudir.addEventListener("click", emmudeix, false);
+      volum.addEventListener("change", ajustarVolum, false);
+
+
+      playpause.blur();
+    }
+
+    window.onload = inicialitzaReproductor;
+
+    function playPause() {
+      if(reproduint.paused) {
+        reproduint.play();
+        playpause.blur();
+      }
+      else {
+        reproduint.pause();
+        playpause.focus();
+      }
+    }
+
+
+    function posicioAudio() {
+      var vesa = parseInt(reproduint.duration * (barra.value / 1000));
+      reproduint.currentTime = vesa;
+      console.log(reproduint.currentTime);
+    }
+
+
+    function actualitzaTemps() {
+      var noutemps = parseInt(reproduint.currentTime * (1000 / reproduint.duration));
+      barra.value = noutemps;
+      console.log(barra.value);
+    }
+
+    // -----Volum-------------
+
+    function emmudeix() {
+      if(reproduint.muted) {
+        reproduint.muted = false;
+        emmudir.blur();
+      }
+      else {
+        reproduint.muted = true;
+        emmudir.focus();
+      }
+    }
+
+    function ajustarVolum() {
+      reproduint.volume = parseInt(volum.value/10);
+    }
+
+  </script>
+</head>
+
+<body>
+  <div id="contenidor">
+    <div class="cover">
+
+    </div>
+    <div class="info">
+
+    </div>
+    <div id="carril"></div>
+    <audio id="reproduint" width="500" height="40" autoplay src="syria.mp3" type="audio/mpeg"></audio>
+    <input id="barra" type="range" min="0" max="1000" value="0" step="1">
+    <div class="botons">
+      <button class="bck"></button>
+      <button id="playpause"></button>
+      <button class="fwd"></button>
+      <button id="emmudir" class="audio"></button>
+    </div>
+    <input id="volum" type="range" min="0" max="1" value="1" step="0.1">
+
+  </div>
+</body>
+</html>
