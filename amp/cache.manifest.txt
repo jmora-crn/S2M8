@@ -1,0 +1,7 @@
+index.html
+img/*
+img/icons/*
+fonts/*
+css/estils.css
+css/reset.css
+js/*
